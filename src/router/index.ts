@@ -1,22 +1,32 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory } from '@ionic/vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import TabsPage from '../views/TabsPage.vue'
+import { useLogin } from '@/composables/useLogin.js'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/tab1'
+    redirect: '/login'
   },
   {
-    path: '/tabs/',
+    path: '/login',
+    component: () => import('@/views/LoginPage.vue')
+  },
+  {
+    path: '/cadastro',
+    component: () => import('@/views/CadastroPage.vue')
+  },
+  {
+    path: '/tabs',
     component: TabsPage,
+    meta:{requerLogacao:true},
     children: [
       {
-        path: '',
-        redirect: '/tabs/tab1'
+        path: '/',
+        redirect: 'tabs/home'
       },
       {
-        path: 'tab1',
+        path: 'home',
         component: () => import('@/views/Tab1Page.vue')
       },
       {
@@ -34,6 +44,21 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const usuStorage = useLogin()
+  const requer = to.meta.requerLogacao === true
+  const logado = usuStorage.Logado.value === true
+
+  if (requer && !logado) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
 })
 
 export default router

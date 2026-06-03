@@ -37,7 +37,7 @@ import {
   IonAvatar,
 } from '@ionic/vue'
 
-import { usePerfil } from '@/composables/usuario/usePerfil'
+import { usePerfil } from '@/composables/usePerfil'
 
 const {
   nome,

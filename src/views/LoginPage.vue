@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { useLogin } from '@/composables/usuario/useLogin'
+import { useLogin } from '@/composables/useLogin'
 import {
   IonPage,
   IonContent,

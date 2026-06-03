@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import { RouteRecordRaw } from "vue-router";
 import TabsPage from "../views/TabsPage.vue";
-import { useLogin } from "@/composables/usuario/useLogin.js";
+import { useLogin } from "@/composables/useLogin.js";
 import LoginPage from "@/views/LoginPage.vue"
 
 const routes: Array<RouteRecordRaw> = [
@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/CadastroPage.vue"),
   },
   {
+    path: "/detalhes/:id",
+    component: () => import("@/views/FigurinhaDetalhePage.vue"),
+  },
+
+  {
     path: "/tabs",
     component: TabsPage,
     meta: { requerLogacao: true },
@@ -33,15 +38,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "home",
-        component: () => import("@/views/Tab1Page.vue"),
+        component: () => import("@/views/AlbumPage.vue"),
       },
       {
         path: "conquista",
-        component: () => import("@/views/Tab2Page.vue"),
+        component: () => import("@/views/ConquistaPage.vue"),
       },
       {
         path: "perfil",
-        component: () => import("@/views/Tab3Page.vue"),
+        component: () => import("@/views/PerfilPage.vue"),
       },
     ],
   },

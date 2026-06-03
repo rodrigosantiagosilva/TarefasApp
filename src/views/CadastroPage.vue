@@ -62,8 +62,8 @@ import {
   IonButton
 } from '@ionic/vue'
 
-import { useCadastro } from '../composables/usuario/useCadastro'
-import { useLogin } from '../composables/usuario/useLogin'
+import { useCadastro } from '../composables/useCadastro'
+import { useLogin } from '../composables/useLogin'
 
 function cadastroHandler() {
 

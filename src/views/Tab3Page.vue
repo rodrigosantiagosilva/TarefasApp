@@ -2,22 +2,61 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 3</ion-title>
+        <ion-title class="center">
+          Olá {{ nome }}
+        </ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 3</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-      <ExploreContainer name="Tab 3 page" />
+    <ion-content :fullscreen="true">
+
+      <div class="perfil">
+
+        <ion-avatar class="avatar">
+          <img
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            alt="Avatar"
+          />
+        </ion-avatar>
+
+        <h2>{{ nome }}</h2>
+
+      </div>
+
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonAvatar,
+} from '@ionic/vue'
+
+import { usePerfil } from '@/composables/usuario/usePerfil'
+
+const {
+  nome,
+} = usePerfil()
 </script>
+
+<style scoped>
+.center {
+  text-align: center;
+}
+
+.perfil {
+  text-align: center;
+  padding: 20px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  margin: 20px auto;
+}
+</style>

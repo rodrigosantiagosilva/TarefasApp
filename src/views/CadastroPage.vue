@@ -62,17 +62,15 @@ import {
   IonButton
 } from '@ionic/vue'
 
-import { useCadastro } from '../composables/useCadastro'
-import { useLogin } from '../composables/useLogin'
+import { useCadastro } from '../composables/usuario/useCadastro'
+import { useLogin } from '../composables/usuario/useLogin'
 
 function cadastroHandler() {
 
   cadastrar()
-
+  
   if (Logado.value) {
-    setTimeout(() => {
-      router.push('/tabs/home')
-    }, 1000)
+    router.push('/tabs/home')
   }
 }
 const {

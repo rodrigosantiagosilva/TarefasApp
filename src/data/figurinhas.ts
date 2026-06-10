@@ -7,52 +7,52 @@ export interface Figurinha {
   coletada: 'yes' | 'no'
 } 
 
-export const figurinhas = ([
+export const figurinhas: Figurinha[] = [
   {
     id: 1,
     foto: '../public/POU.png',
     nome: 'Pou',
-    descricao: '',
+    descricao: 'Pet supremo',
     data: '',
     coletada: 'no'
   },
   {
     id: 2,
-    foto: '/pikachu.png',
-    nome: 'Pikachu',
-    descricao: 'Pokémon elétrico.',
+    foto: '../public/Patrick com rosto humano e pose boba.png',
+    nome: 'RO7 ESTRELA',
+    descricao: 'IA IA A IE IE',
     data: '2025',
     coletada: 'no'
   },
   {
     id: 3,
-    foto: '/mario.png',
-    nome: 'Mario',
-    descricao: 'Herói do Reino dos Cogumelos.',
+    foto: '../public/DOLLY.png',
+    nome: 'Dolly',
+    descricao: 'SEU AMIGUINHO',
     data: '2025',
     coletada: 'no'
   },
   {
     id: 4,
-    foto: '/sonic.png',
-    nome: 'Sonic',
-    descricao: 'O ouriço mais rápido do mundo.',
+    foto: '../public/SABOR.jpg',
+    nome: 'MR.SABOR',
+    descricao: 'ENERGÉTICO',
     data: '2025',
     coletada: 'no'
   },
   {
     id: 5,
-    foto: '/minecraft.png',
-    nome: 'Steve',
-    descricao: 'Personagem principal do Minecraft.',
+    foto: '../public/AURA.jpg',
+    nome: 'Aura + Ego',
+    descricao: 'Rego',
     data: '2025',
     coletada: 'no'
   },
   {
     id: 6,
-    foto: '/amongus.png',
-    nome: 'Crewmate',
-    descricao: 'Tripulante do Among Us.',
+    foto: '../public/tungtung.jpg',
+    nome: 'Tung Tung Sahur',
+    descricao: '3T',
     data: '2025',
     coletada: 'no'
   },
@@ -168,4 +168,4 @@ export const figurinhas = ([
     data: '2025',
     coletada: 'no'
   }
-])
+]

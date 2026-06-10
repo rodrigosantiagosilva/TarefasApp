@@ -1,27 +1,77 @@
 import { ref } from "vue"
-import {figurinhas as figurinhasData} from "../data/Figurinhas"
-  
-const figurinhas = ref([...figurinhasData])
+import {
+  figurinhas as figurinhasData,
+  type Figurinha
+} from "../data/Figurinhas"
 
+const dadosSalvos = localStorage.getItem("figurinhas")
+
+const figurinhas = ref<Figurinha[]>(  dadosSalvos
+    ? (JSON.parse(dadosSalvos) as Figurinha[])
+    : [...figurinhasData]
+)
 
 export function useAlbum() {
-  function irParaDetalhe(id: number) {
-    console.log('Figurinha:', id)
+
+  const alertaAberto = ref(false)
+  const mensagemAlerta = ref("")
+
+  function salvar() {
+    localStorage.setItem(
+      "figurinhas",
+      JSON.stringify(figurinhas.value)
+    )
   }
 
-  function coletarFigurinha(id: number) {
-    const figurinha = figurinhas.value.find(
-      f => f.id === id
+  function coletarFigurinha() {
+
+    const naoColetadas = figurinhas.value.filter(
+      figurinha => figurinha.coletada === "no"
     )
 
-    if (figurinha) {
-      figurinha.coletada = 'yes'
+    if (naoColetadas.length === 0) {
+      mensagemAlerta.value =
+        "Você já completou o álbum!"
+      alertaAberto.value = true
+      return
     }
-  }
 
+    const indice = Math.floor(
+      Math.random() * naoColetadas.length
+    )
+
+    const sorteada = naoColetadas[indice]
+
+    sorteada.coletada = "yes"
+
+    salvar()
+
+    mensagemAlerta.value =
+      `Você coletou ${sorteada.nome}!`
+
+    alertaAberto.value = true
+  }
+function resetarAlbum() {
+
+  figurinhas.value.forEach(figurinha => {
+    figurinha.coletada = "no"
+  })
+
+  localStorage.setItem(
+    "figurinhas",
+    JSON.stringify(figurinhas.value)
+  )
+
+  mensagemAlerta.value =
+    "Todas as figurinhas foram resetadas!"
+
+  alertaAberto.value = true
+}
   return {
     figurinhas,
+    resetarAlbum,
     coletarFigurinha,
-    irParaDetalhe
+    alertaAberto,
+    mensagemAlerta
   }
 }

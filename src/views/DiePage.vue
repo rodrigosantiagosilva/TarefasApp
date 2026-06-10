@@ -26,12 +26,47 @@
         Limpar Local Storage
       </ion-button>
 
+      <ion-button
+        expand="block"
+        color="warning"
+        @click="abrirConfirmacao = true"
+      >
+        Resetar Figurinhas
+      </ion-button>
+
       <ion-alert
         :is-open="isAlertOpen"
         header="Sucesso"
         message="Todos os dados foram apagados."
         :buttons="['OK']"
         @didDismiss="isAlertOpen = false"
+      />
+
+      <ion-alert
+        :is-open="abrirConfirmacao"
+        header="Confirmar"
+        message="Deseja realmente deixar todas as figurinhas como não coletadas?"
+        :buttons="[
+          {
+            text: 'Cancelar',
+            role: 'cancel'
+          },
+          {
+            text: 'Resetar',
+            handler: () => {
+              resetarAlbum()
+            }
+          }
+        ]"
+        @didDismiss="abrirConfirmacao = false"
+      />
+
+      <ion-alert
+        :is-open="alertaAberto"
+        header="Sucesso"
+        :message="mensagemAlerta"
+        :buttons="['OK']"
+        @didDismiss="alertaAberto = false"
       />
 
     </ion-content>
@@ -41,6 +76,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAlbum } from '@/composables/useAlbum'
+
 import {
   IonPage,
   IonHeader,
@@ -52,13 +89,23 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
+  IonCardContent
 } from '@ionic/vue'
-  const router = useRouter()
+
+const router = useRouter()
+
 const isAlertOpen = ref(false)
+const abrirConfirmacao = ref(false)
+
 function limparStorage() {
   localStorage.clear()
   isAlertOpen.value = true
   router.push('/')
 }
+
+const {
+  resetarAlbum,
+  alertaAberto,
+  mensagemAlerta
+} = useAlbum()
 </script>

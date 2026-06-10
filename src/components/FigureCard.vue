@@ -1,14 +1,14 @@
 <template>
 
-  <ion-card @click="$emit('irDetalhe', figurinha.id)" class="center">
+  <ion-card  @click="$emit('irDetalhe', figurinha.id)" class="center">
     <ion-card-title>
     {{ figurinha.id }}
       </ion-card-title>
-    <ion-card-content class="moldura center"><img :src="figurinha.foto" :alt="figurinha.nome" class="imagem center" /></ion-card-content>
+    <ion-card-content v-if= "figurinha.coletada=== 'yes'" class="moldura center"><img :src="figurinha.foto" :alt="figurinha.nome" class="imagem center" /></ion-card-content>
+    <ion-card-content v-else class="moldura center"><img src="../../public/PRETO.jpg" alt="preto" class="imagem black"></ion-card-content>
     <ion-card-header>
-      <ion-card-title>
-        {{ figurinha.nome }}
-      </ion-card-title>
+      <ion-card-title v-if="figurinha.coletada==='yes'">{{ figurinha.nome }}</ion-card-title>
+      <ion-card-title v-else >{{ figurinha.descricao }}</ion-card-title>
       <ion-card-subtitle>
         {{ figurinha.data }}
       </ion-card-subtitle>
@@ -49,16 +49,17 @@ defineEmits(["irDetalhe"]);
 <style scoped>
 /* Estilização principal do Card */
 ion-card {
-  --background: #a6a6a6; /* Cinza de fundo idêntico ao da imagem */
-  --box-shadow: none;   /* Remove sombras para ficar totalmente plano */
-  border-radius: 0px;   /* Se quiser bordas retas como na imagem */
+  --background: #74aaf1a2; /* Cinza de fundo idêntico ao da imagem */ 
+  border-radius: 30px;   /* Se quiser bordas retas como na imagem */
   position: relative;   /* Necessário para posicionar o número e o chip */
-  height: 400px;        /* Defina uma altura fixa que faça sentido no seu layout */
+  height: 500px;        /* Defina uma altura fixa que faça sentido no seu layout */
+  width:400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 5px;
+  margin-left: 20px;
   padding: 20px;
 }
 
@@ -86,7 +87,9 @@ ion-card > ion-card-title:first-child {
   height: auto;
   object-fit: contain;
 }
-
+.black{
+  max-width: 180px; 
+}
 /* Bloco de textos (Nome) */
 ion-card-header {
   text-align: center;
@@ -115,8 +118,7 @@ ion-card-content:last-child {
 }
 
 /* Estilização do Chip para parecer o botão vermelho da imagem */
-ion-chip {
-  --background: #ff2d37; /* Vermelho vibrante */
+ion-chip {/* Vermelho vibrante */
   color: #000000;        /* Texto preto */
   font-size: 1.1rem;
   padding: 25px 20px;    /* Aumenta o tamanho interno para ficar robusto */

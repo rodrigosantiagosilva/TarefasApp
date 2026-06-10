@@ -6,9 +6,22 @@ import {
 
 const dadosSalvos = localStorage.getItem("figurinhas")
 
-const figurinhas = ref<Figurinha[]>(  dadosSalvos
-    ? (JSON.parse(dadosSalvos) as Figurinha[])
-    : [...figurinhasData]
+const figurinhas = ref<Figurinha[]>(
+  figurinhasData.map(figurinhaOriginal => {
+
+    const figurinhaSalva = dadosSalvos
+      ? (JSON.parse(dadosSalvos) as Figurinha[]).find(
+          f => f.id === figurinhaOriginal.id
+        )
+      : undefined
+
+    return {
+      ...figurinhaOriginal,
+      coletada:
+        figurinhaSalva?.coletada ??
+        figurinhaOriginal.coletada
+    }
+  })
 )
 
 export function useAlbum() {
@@ -32,6 +45,7 @@ export function useAlbum() {
     if (naoColetadas.length === 0) {
       mensagemAlerta.value =
         "Você já completou o álbum!"
+
       alertaAberto.value = true
       return
     }
@@ -51,26 +65,25 @@ export function useAlbum() {
 
     alertaAberto.value = true
   }
-function resetarAlbum() {
 
-  figurinhas.value.forEach(figurinha => {
-    figurinha.coletada = "no"
-  })
+  function resetarAlbum() {
 
-  localStorage.setItem(
-    "figurinhas",
-    JSON.stringify(figurinhas.value)
-  )
+    figurinhas.value.forEach(figurinha => {
+      figurinha.coletada = "no"
+    })
 
-  mensagemAlerta.value =
-    "Todas as figurinhas foram resetadas!"
+    salvar()
 
-  alertaAberto.value = true
-}
+    mensagemAlerta.value =
+      "Todas as figurinhas foram resetadas!"
+
+    alertaAberto.value = true
+  }
+
   return {
     figurinhas,
-    resetarAlbum,
     coletarFigurinha,
+    resetarAlbum,
     alertaAberto,
     mensagemAlerta
   }

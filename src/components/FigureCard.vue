@@ -5,7 +5,7 @@
     {{ figurinha.id }}
       </ion-card-title>
     <ion-card-content v-if= "figurinha.coletada=== 'yes'" class="moldura center"><img :src="figurinha.foto" :alt="figurinha.nome" class="imagem center" /></ion-card-content>
-    <ion-card-content v-else class="moldura center"><img src="../../public/PRETO.jpg" alt="preto" class="imagem black"></ion-card-content>
+    <ion-card-content v-else class="moldura center"></ion-card-content>
     <ion-card-header>
       <ion-card-title v-if="figurinha.coletada==='yes'">{{ figurinha.nome }}</ion-card-title>
       <ion-card-title v-else >{{ figurinha.descricao }}</ion-card-title>

@@ -58,9 +58,9 @@ export const figurinhas: Figurinha[] = [
   },
   {
     id: 7,
-    foto: '../public/ITSFINE.png',
-    nome: 'Its Fine',
-    descricao: 'BLZ',
+    foto: '../public/imagem.png',
+    nome: 'Davy Jones',
+    descricao: 'Tem 8 Gramas de Proteina',
     data: '2025',
     coletada: 'no'
   },
@@ -146,9 +146,9 @@ export const figurinhas: Figurinha[] = [
   },
   {
     id: 18,
-    foto: '../public/USA.jpeg',
-    nome: 'USA',
-    descricao: 'EUA',
+    foto: '../public/Image.jpg',
+    nome: 'PRI PRI PATACAVS',
+    descricao: 'CAVILHA',
     data: '2025',
     coletada: 'no'
   },
@@ -162,9 +162,9 @@ export const figurinhas: Figurinha[] = [
   },
   {
     id: 20,
-    foto: '/charizard.png',
-    nome: 'Charizard',
-    descricao: 'Pokémon de fogo e voo.',
+    foto: '../public/Mídia.jpg',
+    nome: 'SENSAÇÃO DE PODER ABSURDA',
+    descricao: 'DESCOLADOS',
     data: '2025',
     coletada: 'no'
   }

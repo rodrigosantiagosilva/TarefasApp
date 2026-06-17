@@ -2,7 +2,7 @@ import { ref } from "vue"
 import {
   figurinhas as figurinhasData,
   type Figurinha
-} from "../data/Figurinhas"
+} from "../data/figurinhas"
 
 const dadosSalvos = localStorage.getItem("figurinhas")
 

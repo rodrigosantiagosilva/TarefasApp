@@ -15,7 +15,6 @@
           v-for="figurinha in figurinhas"
           :key="figurinha.id"
           :figurinha ="figurinha"
-          @irDetalhe="irParaDetalhe"
         />
       </ion-card>
 
@@ -37,8 +36,7 @@ import CardFigurinha from '@/components/FigureCard.vue'
 import { useAlbum } from '@/composables/useAlbum'
 
 const {
-  figurinhas,
-  irParaDetalhe
+  figurinhas
 } = useAlbum()
 </script>
 

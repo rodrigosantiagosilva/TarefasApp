@@ -52,18 +52,22 @@
   </ion-page>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   IonPage,
   IonContent,
   IonItem,
   IonLabel,
   IonInput,
-  IonButton
+  IonButton,
+  useIonRouter
 } from '@ionic/vue'
 
 import { useCadastro } from '../composables/useCadastro'
 import { useLogin } from '../composables/useLogin'
+
+
+const router = useIonRouter()
 
 function cadastroHandler() {
 

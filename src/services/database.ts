@@ -12,12 +12,20 @@ export async function initDatabase() {
 
     await db.open()
 
+    // await db.execute (
+    //   `CREATE TABLE IF NOT EXISTS contatos (
+    //     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //     nome TEXT NOT NULL,
+    //     email TEXT NOT NULL,
+    //     telefone TEXT
+    //   );`,
+    // )
     await db.execute (
-      `CREATE TABLE IF NOT EXISTS contatos (
+      `CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        email TEXT NOT NULL,
-        telefone TEXT
+        login TEXT NOT NULL,
+        senha TEXT NOT NULL
       );`,
     )
   } catch (error) {
@@ -25,39 +33,73 @@ export async function initDatabase() {
   }
 }
 
-export async function addContato(
+// export async function addContato(
+//   nome: string,
+//   email: string,
+//   telefone: string
+// ) {
+//   const query =
+//     'INSERT INTO usuarios (nome, email, telefone) VALUES (?, ?, ?);'
+
+//   await db.run(query, [nome, email, telefone])
+// }
+export async function addUsuario(
   nome: string,
   email: string,
-  telefone: string
+  senha: string
 ) {
   const query =
-    'INSERT INTO contatos (nome, email, telefone) VALUES (?, ?, ?);'
+    'INSERT INTO contatos (nome, email, senha) VALUES (?, ?, ?);'
 
-  await db.run(query, [nome, email, telefone])
+  await db.run(query, [nome, email, senha])
 }
-  export async function listContatos(){
-    const result = await db.query(`SELECT * FROM contatos;`)
-    return result.values || []
-  }
+  // export async function listContatos(){
+  //   const result = await db.query(`SELECT * FROM contatos;`)
+  //   return result.values || []
+  // }
 
-  export async function deleteContatoById(id:number){
-    const query = 'DELETE FROM contatos where id = ?';
+  // export async function deleteContatoById(id:number){
+  //   const query = 'DELETE FROM contatos where id = ?';
+  //   return await db.run(query,[id])
+  // }
+
+  export async function deleteUsuarioById(id:number){
+    const query = 'DELETE FROM usuarios where id = ?';
     return await db.run(query,[id])
   }
 
-  export async function updateContato(
+//   export async function updateContato(
+//   id:number,
+//   nome: string,
+//   email: string,
+//   telefone: string
+// ) {
+//   const query =
+//     'UPDATE contatos SET nome = ?, email = ?, telefone = ? WHERE id = ?;'
+//   await db.run(query,[nome, email, telefone, id])
+// }
+  export async function updateUsuario(
   id:number,
-  nome: string,
-  email: string,
-  telefone: string
+  nome:string,
+  login:string,
+  senha: string
 ) {
   const query =
-    'UPDATE contatos SET nome = ?, email = ?, telefone = ? WHERE id = ?;'
-  await db.run(query,[nome, email, telefone, id])
+    'UPDATE contatos SET nome = ?, login = ?, senha = ? WHERE id = ?;'
+  await db.run(query,[nome,login,senha, id])
 }
 
-  export async function findContatoById(id:number){
-    const query = 'SELECT FROM contatos where id = ?';
-    const result = await db.query(query,[id])
+export async function realizarLogin(
+  login: string,
+  senha: string
+){
+  const query = `SELECT * FROM usuarios where login = ? and senha = ?`
+  const result = await db.query(query,[login, senha])
+  return result.values || []
+}
+
+  export async function findContatoByName(nome:string){
+    const query = 'SELECT FROM contatos where nome = ?';
+    const result = await db.query(query,[nome])
     return result.values ||[]
   }

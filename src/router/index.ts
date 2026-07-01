@@ -7,7 +7,8 @@ import LoginPage from "../views/LoginPage.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/login",
+    // redirect: "/login",
+    redirect:"/tap"
   },
   {
     path:"/die",
@@ -17,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
     component: LoginPage,
+  },
+  {
+    path: "/tap",
+    component: () => import("../views/Tap1Page.vue"),
+  },
+  {
+    path: "/tab",
+    component: () => import("../views/Tab2Page.vue"),
   },
   {
     path: "/cadastro",
